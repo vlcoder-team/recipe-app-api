@@ -5,12 +5,12 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
-    PermissionsMixin
+    PermissionsMixin,
 )
 
 
 class UserManager(BaseUserManager):
-    """Manage for users."""
+    """Manager for users."""
 
     def create_user(self, email, password=None, **extra_fields):
         """Create, save and return a new user."""
