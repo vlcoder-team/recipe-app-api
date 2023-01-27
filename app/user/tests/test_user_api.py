@@ -9,9 +9,9 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 
-CREATE_USER_URL = reverse("user:create")
-TOKEN_URL = reverse("user:token")
-ME_URL = reverse("user:me")
+CREATE_USER_URL = reverse('user:create')
+TOKEN_URL = reverse('user:token')
+ME_URL = reverse('user:me')
 
 
 def create_user(**params):
@@ -56,7 +56,7 @@ class PublicUserApiTests(TestCase):
         payload = {
             'email': 'test@example.com',
             'password': 'pw',
-            'name': 'Test Name',
+            'name': 'Test name',
         }
         res = self.client.post(CREATE_USER_URL, payload)
 
@@ -103,7 +103,6 @@ class PublicUserApiTests(TestCase):
         self.assertNotIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
-
     def test_retrieve_user_unauthorized(self):
         """Test authentication is required for user."""
         res = self.client.get(ME_URL)
@@ -135,13 +134,13 @@ class PrivateUserApiTests(TestCase):
         })
 
     def test_post_me_not_allowed(self):
-        """Test POST is not allowed on the me endpoint."""
+        """Test POST is not allowed for the me endpoint."""
         res = self.client.post(ME_URL, {})
 
         self.assertEqual(res.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_update_user_profile(self):
-        """Test updating the user profile for authenticated user."""
+        """Test updating the user profile for the authenticated user."""
         payload = {'name': 'Updated Name', 'password': 'newpassword123'}
 
         res = self.client.patch(ME_URL, payload)
